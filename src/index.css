@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+html {
+  scroll-behavior: smooth;
+}
+
+
+:root {
+  --primary: #1ca7a6;
+  --secondary: #ff6b5a;
+}
+.container {
+  @apply w-[95%] lg:w-[90%] 2xl:w-[80%]  mx-auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+.bg {
+  background-color: var(--primary) !important;
+}
+.color {
+  color: var(--primary) !important;
+}
+.hcolor {
+  @apply hover:text-[var(--primary)]!;
+}
+.border1 {
+  border-color: var(--primary) !important;
+}
+.hbg {
+  @apply hover:bg-[var(--primary)]!;
+}
+
+.bg2 {
+  background-color: var(--secondary) !important;
+}
+.hbg2 {
+  @apply hover:bg-[var(--secondary)]!;
+}
+
+.color2 {
+  color: var(--secondary) !important;
+}
+.hcolor2 {
+  @apply hover:text-[var(--secondary)]!;
+}
+.border2 {
+  border-color: var(--secondary) !important;
+}
+
+.title {
+  font-family: "Salsify", cursive;
+  @apply text-[45px] md:text-[50px] lg:text-[50px] xl:text-[60px] font-[400] text-gray-900 mb-2 leading-tight;
+}
+.subtitle {
+  font-family: "Angello", cursive;
+  @apply text-[28px] lg:text-[30px] text-[var(--primary)];
+}
+.p {
+  @apply text-[17px] text-[#6E7B8B];
+}
+.pad {
+  @apply py-15 md:py-20 lg:py-28;
+}
+.mar {
+  @apply my-15 md:my-20 lg:my-28;
+}
+.btn {
+  @apply bg-[var(--primary)] text-white hover:text-[var(--primary)] border border-[var(--primary)] hover:bg-[transparent]!  px-[25px] py-[9px] text-[15px] cursor-pointer rounded-sm hover:border-[var(--primary)] font-medium;
+}
+.btn2 {
+  @apply bg-[var(--secondary)] text-white hover:text-[var(--secondary)] border border-[var(--secondary)] hover:bg-[transparent]!  px-[25px] py-[9px] text-[15px] cursor-pointer rounded-sm hover:border-[var(--secondary)] font-medium;
+}
+
