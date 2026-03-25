@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GiOyster } from "react-icons/gi";
 import Dashboard from "./pages/Dashboard";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router";
 import {
   SidebarInset,
   SidebarProvider,
@@ -9,12 +9,10 @@ import {
 } from "./components/ui/sidebar";
 import { AppSidebar } from "./components/app-sidebar";
 import { links } from "./components/app-sidebar";
-import { Profile } from "./components/Profile";
-import {  Bell, HelpCircle, Search } from "lucide-react";
-import { Input } from "./components/ui/input";
-import { BsBell } from "react-icons/bs";
-import { RxQuestionMarkCircled } from "react-icons/rx";
 import Header from "./components/Header";
+import Orders from "./pages/Orders";
+import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
 
 function Preloader() {
   return (
@@ -146,13 +144,16 @@ function App() {
       <main className="w-full"></main>
       <SidebarProvider>
         <AppSidebar />
-        <SidebarInset>
+        <SidebarInset className="flex-1 overflow-x-hidden">
          <Header/>
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0 ">
+          <div className="p-5 max-w-full">
+            {/* <p className="block md:hidden text-[20px] font-[500] mb-1">{currentPage.pageTitle}</p> */}
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
             </Routes>
-            <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
           </div>
         </SidebarInset>
       </SidebarProvider>

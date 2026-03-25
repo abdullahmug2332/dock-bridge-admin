@@ -1,9 +1,449 @@
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  MoreVertical,
+  TrendingUp,
+  TrendingDown,
+  Download,
+  Filter,
+} from "lucide-react";
+import { LuSettings2 } from "react-icons/lu";
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { PiCoinsBold } from "react-icons/pi";
+import { FaTag } from "react-icons/fa";
+import { BiSolidShoppingBagAlt } from "react-icons/bi";
+import { VscGraph } from "react-icons/vsc";
+import { BsArrowUpRightCircle } from "react-icons/bs";
+import { IoCalendarOutline } from "react-icons/io5";
 
+const salesData = [
+  { month: "Jan", sales: 10000 },
+  { month: "Feb", sales: 15000 },
+  { month: "Mar", sales: 12000 },
+  { month: "Apr", sales: 18000 },
+  { month: "May", sales: 22000 },
+  { month: "Jun", sales: 25000 },
+  { month: "Jul", sales: 23000 },
+  { month: "Aug", sales: 28000 },
+  { month: "Sep", sales: 24000 },
+  { month: "Oct", sales: 32000 },
+  { month: "Nov", sales: 28000 },
+  { month: "Dec", sales: 35000 },
+];
+
+const inventoryData = [
+  { name: "Shrimp", quantity: 500 },
+  { name: "Salmon", quantity: 300 },
+  { name: "Crab", quantity: 200 },
+  { name: "Lobster", quantity: 200 },
+  { name: "Cod", quantity: 450 },
+];
+
+const productSalesData = [
+  { name: "Atlantic Salmon", value: 35 },
+  { name: "King Crab Legs", value: 28 },
+  { name: "Pacific Tuna", value: 18 },
+  { name: "Maine Lobster", value: 12 },
+  { name: "Jumbo Shrimp", value: 7 },
+];
+
+const trafficData = [
+  { day: "Mon", visits: 500 },
+  { day: "Tue", visits: 300 },
+  { day: "Wed", visits: 250 },
+  { day: "Thu", visits: 200 },
+  { day: "Fri", visits: 600 },
+  { day: "Sat", visits: 150 },
+];
+
+const COLORS = ["#1e40af", "#0f766e", "#ea580c", "#7c3aed", "#dc2626"];
+
+interface StatCardProps {
+  icon: any;
+  title: string;
+  value: string;
+  trend: number;
+  trendText: string;
+  bgColor: string;
+  textColor: string;
+}
+
+function StatCard({
+  icon,
+  title,
+  value,
+  trend,
+  trendText,
+  bgColor,
+  textColor,
+}: StatCardProps) {
+  const isPositive = trend > 0;
+
+  return (
+    <Card
+      className={`${bgColor} p-5 lg:p-3 xl:p-5 text-white rounded-2xl relative overflow-hidden`}
+    >
+      <div className="relative z-10">
+        <div className="mb-2">{icon}</div>
+        <h3 className="text-[17px] font-medium opacity-90">{title}</h3>
+        <div className="flex items-center gap-2">
+          <p className="text-3xl font-bold mt-2 flex-1 ">{value}</p>
+          <BsArrowUpRightCircle className="text-[25px]" />
+        </div>
+        <div className="flex items-center gap-2 mt-4 text-xs border-t pt-2">
+          <span className={`flex items-center gap-1 text-white text-[16px]`}>
+            {isPositive ? "↑" : "↓"} {Math.abs(trend)}.5%
+          </span>
+          <span className="opacity-75 ml-auto text-[13px]">
+            from last period
+          </span>
+        </div>
+      </div>
+    </Card>
+  );
+}
 
 export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState("Overview");
+  const tabs = ["Overview", "Sales", "Order", "Report"];
+  const stats = [
+    {
+      icon: (
+        <PiCoinsBold className="bg-white text-[#63A2F2] text-[45px] p-2 rounded-xl" />
+      ),
+      title: "Total Sales",
+      value: "$23,569.00",
+      trend: 10,
+      trendText: "from last period",
+      bgColor: "bg-[#63A2F2]",
+      textColor: "text-white",
+    },
+    {
+      icon: (
+        <FaTag className="bg-white text-[#12AA77] text-[45px] p-2 rounded-xl" />
+      ),
+      title: "Pre-Orders",
+      value: "300",
+      trend: 3,
+      trendText: "from last period",
+      bgColor: "bg-gradient-to-l from-[#4BCE9C] to-[#12AA77]",
+      textColor: "text-white",
+    },
+    {
+      icon: (
+        <BiSolidShoppingBagAlt className="bg-white text-[#F97054] text-[45px] p-2 rounded-xl" />
+      ),
+      title: "Inventory Count",
+      value: "1,204",
+      trend: 0,
+      trendText: "from last period",
+      bgColor: "bg-gradient-to-r from-[#F97054] to-[#FC926A]",
+      textColor: "text-white",
+    },
+    {
+      icon: (
+        <VscGraph className="bg-white text-[#8550E0] text-[45px] p-2 rounded-xl" />
+      ),
+      title: "Total Products",
+      value: "600",
+      trend: -6,
+      trendText: "from last period",
+      bgColor: "bg-gradient-to-r from-[#8550E0] to-[#BB75EF]",
+      textColor: "text-white",
+    },
+  ];
+
   return (
-    <div className="">
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti recusandae excepturi harum qui. Itaque, sit, architecto est exercitationem eos deserunt voluptates deleniti rerum, consequuntur fuga sint placeat veritatis. Earum, quaerat? Nemo voluptatibus et iste neque labore, pariatur odit laborum, vel, vero quaerat repudiandae autem cupiditate dignissimos sunt officia consequuntur cumque? Architecto laboriosam dolore, eius tenetur ex cumque enim quae consequatur laborum sint aspernatur provident? Exercitationem fugiat cumque mollitia qui iusto eveniet! Consequuntur doloribus beatae culpa iure officiis dolorem delectus itaque laborum ullam maiores modi quam iste, illum eveniet alias voluptates mollitia! Est iusto dicta ad veniam! Quam exercitationem illo, nesciunt cupiditate quisquam, magni itaque fugit sit aperiam aut expedita in. Nesciunt consequatur blanditiis odio esse. Asperiores placeat corrupti, cumque alias minima totam ducimus, at eum laborum adipisci error, ab nostrum voluptate velit distinctio maiores officiis. Aliquam quis fuga dolore nostrum voluptatem nobis unde, cupiditate nisi voluptatibus natus totam autem quaerat dolor error nesciunt sunt hic eveniet quidem obcaecati quam atque iusto incidunt vitae. Incidunt, voluptatum ab quis sunt eveniet quisquam numquam culpa rerum eligendi, aut voluptas illum fugit tempore sed omnis repudiandae nobis deleniti. Aspernatur asperiores quam nemo minima nesciunt? Necessitatibus aspernatur repellat optio labore asperiores quas aperiam eaque tempora vel quae vitae nisi inventore, dolorem cum et perspiciatis odit sint obcaecati nostrum quos perferendis autem praesentium illo quaerat! Iste dolorum architecto accusamus veritatis, impedit voluptatum nostrum corrupti velit voluptate aspernatur, consequuntur in. Dicta quam in ea cupiditate deserunt, minima molestias cumque mollitia animi, nesciunt inventore dignissimos minus vitae eos voluptates at, necessitatibus quis omnis eveniet? Reiciendis, ratione qui nesciunt exercitationem quidem, fuga nam modi amet fugit soluta eaque ullam veritatis dolor aliquam quae aut quibusdam nulla architecto facilis! Explicabo, quos perferendis quasi amet quae saepe ut molestias ullam aperiam cupiditate sint cum dicta repudiandae, veritatis deserunt dolor et magni corporis provident animi tempore aliquam nihil quibusdam odit. Doloribus, quaerat nulla! Incidunt quae nam temporibus praesentium consequuntur repellendus illum culpa mollitia fugiat reiciendis sed repudiandae dicta perferendis unde alias voluptate sunt deleniti ipsam, debitis voluptatem. Eius velit consequatur in cumque debitis facilis. Quidem eum aliquid sed laborum dolore tempora magnam distinctio saepe repudiandae fugiat iure, obcaecati quaerat numquam enim! Tempore, sit mollitia repellendus fuga fugit dignissimos minus repudiandae quaerat dolorem excepturi reiciendis nihil velit aperiam? Possimus quidem obcaecati eum sequi doloremque. Earum, expedita exercitationem quos possimus vel, nostrum laboriosam quo nesciunt et, placeat fuga omnis dicta voluptate qui provident inventore alias delectus corrupti esse modi voluptates molestias dolorem. A cumque modi eaque obcaecati reprehenderit distinctio iste, quia labore ad harum, unde ipsa ipsam optio ipsum ducimus, nihil quibusdam! Placeat, pariatur corporis suscipit atque blanditiis laboriosam doloribus officiis minima earum! Libero velit veniam architecto quos laudantium voluptates amet obcaecati sapiente aliquid, modi molestiae iure consectetur, tenetur accusantium rem animi, distinctio corporis et nisi! Recusandae esse eos cumque quod obcaecati asperiores voluptas facere sit rerum aliquid! Minus nobis consequatur voluptates inventore ipsa velit molestiae! Veniam, nesciunt! Totam et consequuntur eos consectetur, non minus enim dolores magnam, dicta officia saepe nesciunt! Fugiat error quos inventore natus, itaque odio harum porro, perspiciatis distinctio, nisi in unde. Ipsum fugit odio omnis sequi qui incidunt, perspiciatis eveniet nam adipisci optio voluptatum vel voluptas a sint libero molestiae, quia quod nulla consectetur pariatur. Aliquam animi, ex incidunt minus fugiat necessitatibus. Nesciunt consectetur corporis quaerat explicabo repellendus ipsa facilis, natus incidunt laudantium. Nemo vitae ab debitis tempora asperiores? Impedit neque animi alias unde ab provident totam, temporibus accusamus non voluptate, suscipit voluptatum, repellendus obcaecati magni culpa. Dolor, aspernatur? Culpa tempore explicabo fugit, alias nostrum vitae consequatur ut. Vero nostrum atque adipisci nihil dolores inventore ullam sunt consequatur rerum ratione amet officiis cum dolor labore quo voluptate modi, et quasi! Quasi dicta voluptate similique incidunt voluptas saepe vero iusto reiciendis sunt, officiis, pariatur quisquam corrupti magnam iure sint illum aperiam quod unde cupiditate nam nobis maiores. Voluptatum nulla veniam provident a temporibus tempora dolorem aliquid quos ea iusto. Incidunt consequatur aut exercitationem esse minima nulla, minus perferendis nesciunt nam at voluptates corporis ea porro debitis libero natus, sed quae repellat expedita itaque architecto nemo vel. Nesciunt neque eius dolorum, ullam nam sit corrupti fugiat qui eos ut. Pariatur voluptate inventore hic, ea officia dolores possimus voluptatem quam vitae vel, consectetur, eligendi eveniet totam excepturi dolor ipsum quis? Optio, cumque. Adipisci numquam sed praesentium corrupti vel delectus itaque velit repudiandae voluptatibus! Obcaecati id minus soluta ipsa perferendis facere, numquam nobis sapiente a repellendus impedit assumenda earum laborum quam non velit accusantium rem optio reiciendis, omnis atque architecto adipisci magni! Laudantium nostrum totam blanditiis illum minima ad voluptate rem veritatis aliquid, laborum quasi facere eius quaerat? Eveniet dolore, vero facilis, id harum fugiat optio asperiores modi omnis quisquam unde consectetur obcaecati inventore explicabo doloribus cumque pariatur sunt? Totam exercitationem dolores delectus, natus quia consequatur eos voluptatibus veniam, commodi, numquam quos ipsa vitae odio nostrum ipsum officiis sunt blanditiis aperiam similique ea atque magnam? Minima nisi, soluta veritatis optio eum architecto laborum consectetur a, fugiat doloremque blanditiis non delectus dignissimos nam commodi, voluptates beatae officia magni. Dolore unde nemo voluptatum quam nam? Nesciunt exercitationem distinctio nulla laudantium enim officia culpa quidem earum iusto provident excepturi corrupti quos, nemo quam soluta corporis et magni debitis asperiores, quas deserunt, odio vel dolor! Similique, placeat reiciendis? Nobis nam molestias laboriosam ex, eos magni nisi temporibus necessitatibus sit voluptatem harum animi at voluptates est delectus suscipit reprehenderit! Optio, obcaecati qui! Obcaecati labore quia fugiat, praesentium reprehenderit est non eligendi sequi excepturi quae eaque ad perferendis optio dolorum ea. Quam eaque, esse fuga aliquam maxime cum similique saepe voluptatibus ipsa itaque quaerat? Impedit quibusdam id tenetur maiores a quasi dicta obcaecati fugit, consectetur debitis voluptates ullam et vel dolor? Sequi dolorem quo, dicta corporis vitae fugit cupiditate! Repellat non totam assumenda cupiditate sequi, quibusdam voluptate! Mollitia consequatur impedit sunt ut quia dolorum, aspernatur necessitatibus eum quam voluptate, voluptatem voluptatum sapiente itaque. Officiis et nemo dicta voluptatum a quaerat laborum distinctio mollitia deserunt libero quam sapiente repellendus dolore corrupti consequuntur veritatis veniam sit, amet minus ipsam ut eum expedita! Maiores, nemo similique. Tempora quia tempore est inventore dicta beatae eveniet maiores iure sit ut maxime aliquid sed illum, ipsa nobis exercitationem voluptates ipsum enim possimus nihil soluta quaerat dolores. Quos, quia ad odit esse ea similique aut maiores perspiciatis totam, magni libero reprehenderit et pariatur, doloremque reiciendis dolor cumque dolorem. Earum tempora nemo pariatur quod repellat. Temporibus eveniet autem dicta magni odit sunt quidem aliquid ipsam nulla alias quae obcaecati, omnis reiciendis. Optio maiores, in consequuntur eum sapiente tempora placeat! Ratione totam enim illum ullam repellendus maiores, nostrum nemo odit earum, labore doloribus consectetur quasi illo repellat facilis aut non dolorem consequatur adipisci, mollitia nobis animi consequuntur! Animi minus ipsam modi, magnam deserunt asperiores? Laboriosam harum, minima non culpa commodi eius aut quae debitis nulla dolore. Labore inventore exercitationem eum voluptatem totam, dicta quae repudiandae esse neque explicabo. Architecto consequuntur nobis facilis, veniam sequi ab aperiam optio cumque sed quae id ut maxime, fugiat autem atque ratione corporis at? Nisi quia deserunt velit? Sequi numquam perspiciatis voluptas expedita cum magnam! Optio fuga necessitatibus obcaecati amet voluptas totam. Fugiat, minima officia odit necessitatibus ducimus tempore similique exercitationem dolor illum. Sunt quisquam et odio ullam quasi ratione expedita minus nemo recusandae. Quod sit quasi illo? Obcaecati, vero necessitatibus natus quis reiciendis perferendis suscipit excepturi vel odit dolores temporibus dolor distinctio illum debitis, sunt voluptatem maiores consequatur numquam, neque ut atque doloremque provident enim? Nisi est repudiandae nam assumenda autem at cumque laboriosam optio aliquid consequatur, inventore commodi beatae. Eligendi necessitatibus nemo tempore accusantium? Excepturi quae dolorum aliquid repellat similique ipsa amet iste libero tenetur. Nostrum mollitia dolore quos maiores quas animi aliquid accusantium eaque. Rerum accusantium eos laboriosam veniam soluta dolore eius architecto delectus vitae alias? Aut quos soluta veritatis similique nesciunt ut, inventore placeat a laudantium odio ipsum, commodi officia? Eligendi dolor voluptatibus modi iure vero et commodi unde laboriosam veritatis aliquid aspernatur repudiandae, adipisci repellendus sunt temporibus molestias nam, maiores ipsa alias maxime consequatur omnis ex. Ipsum, dicta? Sapiente rem fugiat aspernatur recusandae labore dolorem quos deserunt nostrum, numquam illum sint dolor nobis quis minus quaerat provident sequi vitae. Minus dolores laboriosam recusandae sunt, placeat perspiciatis blanditiis numquam beatae praesentium, eius molestias vel quia sed molestiae repudiandae suscipit ullam esse soluta magnam, sit repellendus. Accusantium hic nemo veniam! Quam ab accusamus voluptatem earum illum et quaerat recusandae itaque exercitationem doloribus, ipsa qui quisquam, provident suscipit delectus dolorem quae consequatur libero atque tempora ut, minima eum iure. Magni distinctio et debitis iure officiis amet quam saepe fuga. Voluptas id ut similique sequi est, quam praesentium recusandae iste voluptatem a ducimus. Porro ab eaque, iusto ex cum aliquid cumque quo perspiciatis impedit odio voluptatem eum non ratione harum corporis modi ad. Saepe voluptatem fugiat amet excepturi iure eaque natus repellendus quaerat, ullam maxime autem tempora impedit cum praesentium, numquam ut illum. Nam impedit beatae ipsum illum reiciendis eius quos nesciunt magni provident deleniti. Delectus a non voluptas quis harum ex vero ipsum, mollitia rerum? Quasi incidunt eligendi vero officiis repellat laborum eos exercitationem a magni illum, voluptates est atque earum commodi reiciendis suscipit nemo repellendus, deleniti temporibus reprehenderit aliquam necessitatibus? Quae nisi cupiditate praesentium quisquam hic unde aliquid, dolor, a voluptatum temporibus vero aliquam? Quasi corporis cumque culpa ipsum ad, enim ea at deleniti similique, ullam molestiae rem veritatis neque excepturi accusamus possimus vero corrupti eos praesentium? Aut sed ducimus blanditiis repudiandae odit dicta amet ullam laudantium nam. Eligendi blanditiis ullam aliquam delectus error repellat voluptas amet nam culpa assumenda? A enim hic non molestiae dolor modi quia ratione distinctio qui natus, voluptatem commodi, iste voluptatibus? Rem ullam tempora, laboriosam tenetur id pariatur similique, eligendi temporibus, corporis sunt soluta velit! Soluta sequi temporibus accusantium minus rerum? Quibusdam necessitatibus aliquid porro minima fugit minus eligendi sunt suscipit officia eaque dolorum fuga iste animi laudantium repudiandae, molestias at quae quod iure tempore optio assumenda velit possimus esse! Iusto voluptate labore eligendi beatae recusandae ad veritatis asperiores earum ipsum veniam quaerat tenetur officia quisquam voluptatem numquam ducimus, quod repellendus eos commodi dolores. Repellat veritatis magni vel sed praesentium, iusto deleniti neque fuga illum. Mollitia quidem accusantium sed dicta voluptatem, quam deserunt minus omnis facere amet quibusdam, aperiam maxime temporibus, maiores praesentium consectetur quas laboriosam id aliquid cupiditate officiis numquam similique eum inventore. Alias, cumque sed repellendus ducimus ipsa at distinctio commodi repellat, dicta vitae dolorum maxime corrupti id nulla nemo magni! Facere, earum! Facilis, non eius! A eum exercitationem cumque sapiente pariatur enim assumenda animi, omnis repellendus ab quia hic consequuntur molestiae iure, optio mollitia neque eos! Exercitationem ducimus ullam numquam ad aperiam vero dolore deleniti sequi, optio quos quae neque esse reiciendis, veritatis dignissimos placeat error vitae molestias, animi facere consequatur. Similique pariatur reiciendis libero eius necessitatibus ipsa, natus perspiciatis. Esse modi et dolor corporis totam fugiat provident. Ab, quos non odio possimus earum minima esse ullam accusamus repellendus sed, inventore atque quis expedita autem voluptates tempore accusantium dolore? Impedit adipisci error ullam ipsam asperiores omnis placeat ratione earum libero fugit harum tempora, quisquam sequi, quas accusantium dolores similique architecto necessitatibus culpa velit itaque fugiat sit nostrum! Sequi at, quam, officia pariatur veniam voluptas nisi velit doloribus iusto modi veritatis labore odit ipsa aliquid? Veritatis, modi praesentium. Iste explicabo aut veniam odit animi, nihil commodi tempora optio omnis ipsum. Amet dolorem dignissimos, nam eius quidem, aperiam cupiditate similique repellat rerum explicabo ab mollitia pariatur illum. Illo molestias, ipsa quasi aliquam magni reprehenderit! In, distinctio. Odio, voluptatem itaque velit ut nulla libero ducimus officiis odit. Itaque esse laudantium similique veniam maiores porro molestias ullam quis temporibus fugiat provident, distinctio nemo nisi! Animi, aspernatur! Praesentium vitae ipsum fugiat animi obcaecati porro dicta in aperiam neque numquam, enim officiis deserunt id maiores, earum eaque rerum, tempore optio? Molestiae, officiis fugiat rerum quidem a et tenetur sit amet vel, porro illum. A aliquam veniam tenetur libero ipsum omnis sit expedita eligendi, tempora dolores rem quis sed officiis corrupti reiciendis voluptates eum quisquam quod! Molestias explicabo architecto dolorum exercitationem. Perspiciatis sed officiis eos? Ducimus repudiandae fugiat accusantium.</p>
+    <div className=" ">
+      <div className="w-full">
+        <p className="block md:hidden text-[20px] font-[500] mb-1">Dashboard</p>
+        {/* Header with Tabs */}
+        <div className="flex flex-row  gap-2 items-center sm:justify-between mb-8 ">
+          <Tabs
+            defaultValue="Overview"
+            className="flex-1 justify-start hidden md:flex"
+          >
+            <TabsList className="bg-[#f4f5f5] border border-[#f4f5f5] rounded-lg p-0">
+              {tabs.map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className="text-[#5A5C66] rounded-lg 
+                   data-[state=active]:text-black 
+                   data-[state=active]:bg-white py-2"
+                >
+                  {tab}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+
+          <div className="flex items-center flex-wrap gap-3 ml-auto">
+            <div className="block md:hidden">
+              <Select>
+                <SelectTrigger className=" bg-[#f4f5f5] text-[#5A5C66]">
+                  <SelectValue placeholder="Overview" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  {tabs.map((tab) => (
+                    <SelectItem key={tab} value={tab}>
+                      {tab}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 border-[#f4f5f5] py-2"
+            >
+              <LuSettings2 size={16} />
+              Filter
+            </Button>
+            <Button className=" text-white flex items-center gap-2">
+              <Download size={16} />
+              Export all
+            </Button>
+          </div>
+        </div>
+
+        {/* KPI Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {stats.map((stat, index) => (
+            <StatCard key={index} {...stat} />
+          ))}
+        </div>
+
+        {/* Charts Grid */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+          {/* Sales Over Time */}
+          <Card className="p-6">
+            <div className="flex items-center gap-1 flex-wrap justify-between mb-6">
+              <h3 className="text-lg font-semibold">Sales Over Time</h3>
+              <div className="flex items-center gap-2 ml-auto">
+                <Select defaultValue="monthly">
+                  <SelectTrigger className="border border-gray-200 h-9 border-none shadow-none text-sm text-gray-600 hover:text-gray-900  ">
+                    <SelectValue />
+                    <IoCalendarOutline />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value="weekly">Weekly</SelectItem>
+                    <SelectItem value="monthly">Monthly</SelectItem>
+                    <SelectItem value="yearly">Yearly</SelectItem>
+                  </SelectContent>
+                </Select>
+                <button>
+                  <MoreVertical size={16} className="text-gray-400" />
+                </button>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={salesData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis
+                  dataKey="month"
+                  stroke="#6b7280"
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis stroke="#6b7280" style={{ fontSize: "12px" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1f2937",
+                    border: "none",
+                    borderRadius: "8px",
+                    color: "#fff",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="sales"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                  dot={{ fill: "#3b82f6", r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </Card>
+
+          {/* Inventory by Product */}
+          <Card className="p-6">
+            <div className="flex items-center flex-wrap gap-1  justify-between mb-6">
+              <h3 className="text-lg font-semibold">Inventory by Product</h3>
+              <div className="flex items-center gap-2 ml-auto">
+                <Select defaultValue="monthly">
+                  <SelectTrigger className="border border-gray-200 h-9 border-none shadow-none text-sm text-gray-600 hover:text-gray-900  ">
+                    <SelectValue />
+                    <IoCalendarOutline />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value="weekly">Weekly</SelectItem>
+                    <SelectItem value="monthly">Monthly</SelectItem>
+                    <SelectItem value="yearly">Yearly</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button className=" text-white flex items-center gap-2">
+                  <Download size={16} />
+                  Export all
+                </Button>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={inventoryData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis
+                  dataKey="name"
+                  stroke="#6b7280"
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis stroke="#6b7280" style={{ fontSize: "12px" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1f2937",
+                    border: "none",
+                    borderRadius: "8px",
+                    color: "#fff",
+                  }}
+                />
+                <Bar dataKey="quantity" fill="#1e40af" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="text-center text-[20px] font-[500]">Quantity</p>
+          </Card>
+        </div>
+
+        {/* Bottom Charts Grid */}
+        <div className="grid  grid-cols-1 xl:grid-cols-2 gap-6">
+          {/* Sales Percentage by Product */}
+          <Card className="p-6">
+            <div className="flex items-center flex-wrap gap-1  justify-between mb-6">
+              <h3 className="text-lg font-semibold">
+                Sales Percentage by Product
+              </h3>
+              <div className="flex items-center gap-2  ml-auto">
+                <Select defaultValue="monthly">
+                  <SelectTrigger className="border border-gray-200 h-9 border-none shadow-none text-sm text-gray-600 hover:text-gray-900  ">
+                    <SelectValue />
+                    <IoCalendarOutline />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value="weekly">Weekly</SelectItem>
+                    <SelectItem value="monthly">Monthly</SelectItem>
+                    <SelectItem value="yearly">Yearly</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button className=" text-white flex items-center gap-2">
+                  <Download size={16} />
+                  Export all
+                </Button>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={productSalesData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, value }) => `${name}: ${value}%`}
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {productSalesData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1f2937",
+                    border: "none",
+                    borderRadius: "8px",
+                    color: "#fff",
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </Card>
+
+          {/* Site Traffic Heatmap */}
+          <Card className="p-6">
+            <div className="flex items-center flex-wrap gap-1  justify-between mb-6">
+              <h3 className="text-lg font-semibold">Site Traffic Heatmap</h3>
+              <div className="flex items-center gap-2  ml-auto">
+                <Select defaultValue="monthly">
+                  <SelectTrigger className="border border-gray-200 h-9 border-none shadow-none text-sm text-gray-600 hover:text-gray-900  ">
+                    <SelectValue />
+                    <IoCalendarOutline />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value="weekly">Weekly</SelectItem>
+                    <SelectItem value="monthly">Monthly</SelectItem>
+                    <SelectItem value="yearly">Yearly</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button className=" text-white flex items-center gap-2">
+                  <Download size={16} />
+                  Export all
+                </Button>
+              </div>
+            </div>
+            
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={trafficData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis
+                  dataKey="day"
+                  stroke="#6b7280"
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis stroke="#6b7280" style={{ fontSize: "12px" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1f2937",
+                    border: "none",
+                    borderRadius: "8px",
+                    color: "#fff",
+                  }}
+                />
+                <Bar dataKey="visits" fill="#16a34a" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+           
+            <p className="text-center text-[20px] font-[500]">Page Visits</p>
+          </Card>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

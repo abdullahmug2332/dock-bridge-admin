@@ -7,7 +7,8 @@ html {
 
 :root {
   --primary: #1ca7a6;
-  --secondary: #ff6b5a;
+  --secondary: #FF6B5A;
+  --background:white;
 }
 .container {
   @apply w-[95%] lg:w-[90%] 2xl:w-[80%]  mx-auto;

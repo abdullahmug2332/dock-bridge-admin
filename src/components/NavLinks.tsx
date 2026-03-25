@@ -23,7 +23,7 @@ import {
   Trash2Icon,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 export function NavLinks({
   links,
 }: {
@@ -52,14 +52,14 @@ export function NavLinks({
                 asChild
                 isActive={isActive}
                 className={`border border-transparent text-[#5A5C66]! 
-          hover:text-[#161924]! hover:bg-[#F4F5F5] hover:border-gray-200
-          ${isActive ? "bg-[#F4F5F5] border-gray-200 text-[#161924]!" : ""}
-        `}
+                  hover:text-[#161924]! hover:bg-[#F4F5F5] hover:border-gray-200
+                  ${isActive ? "bg-[#F4F5F5] border-gray-200 text-[#161924]!" : ""}
+                `}
               >
-                <a href={item.url} className="py-5! flex items-center gap-2">
+                <Link to={item.url} className="py-5! flex items-center gap-2">
                   {item.icon}
                   {open && <span>{item.name}</span>}
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           );

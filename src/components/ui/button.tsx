@@ -9,9 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg2 text-white border border2 hover:bg-[transparent]! hcolor2 px-[25px] py-[9px] text-[15px] cursor-pointer rounded-sm hborder2 font-medium",
+        default: "bg2 text-white border border2 hover:bg-[transparent]! hcolor2 px-[25px] py-[7px] text-[15px] cursor-pointer rounded-sm hborder2 font-medium text-[14px]",
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border-gray-300 bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:

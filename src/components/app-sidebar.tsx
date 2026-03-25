@@ -25,46 +25,55 @@ import { useLocation } from "react-router-dom";
 export const links = [
   {
     name: "Dashboard",
+    pageTitle:"Sales Dashboard",
     url: "/",
     icon: <RiHome6Line className="size-5!" />,
   },
   {
     name: "Orders",
+    pageTitle:"Orders List",
     url: "/orders",
     icon: <TbReceipt className="size-5!" />,
   },
   {
     name: "Products",
+    pageTitle:"Products",
     url: "/products",
     icon: <BsBoxSeam className="size-5!" />,
   },
   {
     name: "Inventory",
+    pageTitle:"Inventory",
     url: "/inventory",
     icon: <LiaBoxSolid className="size-5!" />,
   },
   {
     name: "Suppliers",
+    pageTitle:"Suppliers",
     url: "/suppliers",
     icon: <Truck className="size-5!" />,
   },
   {
     name: "CMS (Website)",
+    pageTitle:"CMS",
     url: "/cms",
     icon: <MdWeb className="size-5!" />,
   },
   {
     name: "Users",
+    pageTitle:"Users",
     url: "/users",
     icon: <HiOutlineUsers className="size-5!" />,
   },
   {
     name: "Reviews",
+    pageTitle:"Reviews",
     url: "/reviews",
     icon: <MdOutlineReviews className="size-5!" />,
   },
   {
     name: "Settings",
+    pageTitle:"Settings",
     url: "/settings",
     icon: <IoSettingsOutline className="size-5!" />,
   },

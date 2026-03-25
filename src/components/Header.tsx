@@ -12,14 +12,11 @@ export default function Header() {
   const currentPage = links.find((link) => link.url === pathname);
   const { open, toggleSidebar } = useSidebar();
   return (
-    <header className="flex h-18 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 sticky top-0 right-0 bg-white border-b border-gray-200">
-      <div className="flex items-center gap-2 px-4 justify-between w-full">
-        <div className="flex items-center gap-3 ">
-          <RxHamburgerMenu className="size-7 block md:hidden" onClick={toggleSidebar} />
-          <img src="/logo.png" alt="logo" className="w-[50%] block md:hidden" />
-          <p className="font-[500] text-[1.4rem] text-gray-800 hidden md:block">
-            {currentPage?.name || "Page"}
-          </p>
+    <header className="flex h-18 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 sticky top-0 right-0 bg-white border-b border-gray-200 z-[99]">
+      <div className="flex items-center gap-2 px-4 justify-between w-full ">
+        <div className="flex items-center gap-3  flex md:hidden">
+          <RxHamburgerMenu className="size-7 " onClick={toggleSidebar} />
+          <img src="/logo.png" alt="logo" className="w-[50%] " />
         </div>
 
         {/* Center: Search */}
@@ -30,7 +27,7 @@ export default function Header() {
           />
           <Input
             placeholder="Search"
-            className="pl-9 pr-10 rounded-md bg-white border-gray-200"
+            className="pl-9 pr-13 rounded-md bg-white border-gray-200"
           />
           <kbd className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 border px-1 py-0.5 rounded">
             ⌘ F
