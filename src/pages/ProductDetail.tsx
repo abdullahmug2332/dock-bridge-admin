@@ -613,7 +613,7 @@ export default function ProductDetail() {
               >
                 Edit Product
               </Button>
-              <Button
+              <Button 
                 onClick={handleUpdateInventory}
                 variant="outline"
                 className="w-full border-gray-300 hover:bg-gray-50 py-5 cursor-pointer"
