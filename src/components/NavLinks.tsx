@@ -1,29 +1,15 @@
 "use client";
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import {
-  MoreHorizontalIcon,
-  FolderIcon,
-  ArrowRightIcon,
-  Trash2Icon,
-} from "lucide-react";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+
 export function NavLinks({
   links,
 }: {
@@ -33,15 +19,15 @@ export function NavLinks({
     icon: React.ReactNode;
   }[];
 }) {
-  const { open } = useSidebar();
+  const { open, setOpen, setOpenMobile } = useSidebar();
   const { pathname } = useLocation();
-  const currentPage = links.find((link) => link.url === pathname);
 
   return (
     <SidebarGroup>
       <SidebarGroupLabel className="text-[#73757C]">
         MAIN MENU
       </SidebarGroupLabel>
+
       <SidebarMenu>
         {links.map((item) => {
           const isActive = pathname === item.url;
@@ -53,10 +39,19 @@ export function NavLinks({
                 isActive={isActive}
                 className={`border border-transparent text-[#5A5C66]! 
                   hover:text-[#161924]! hover:bg-[#F4F5F5] hover:border-gray-200
-                  ${isActive ? "bg-[#F4F5F5] border-gray-200 text-[#161924]!" : ""}
-                `}
+                  ${
+                    isActive
+                      ? "bg-[#F4F5F5] border-gray-200 text-[#161924]!"
+                      : ""
+                  }`}
               >
-                <Link to={item.url} className="py-5! flex items-center gap-2">
+                <Link
+                  to={item.url}
+                  onClick={() => {
+                    setOpenMobile(false); // 🔥 THIS closes the sheet
+                  }}
+                  className="py-5! flex items-center gap-2"
+                >
                   {item.icon}
                   {open && <span>{item.name}</span>}
                 </Link>

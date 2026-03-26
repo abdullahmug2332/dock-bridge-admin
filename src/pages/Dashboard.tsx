@@ -181,7 +181,7 @@ export default function Dashboard() {
       <div className="w-full">
         <p className="block md:hidden text-[20px] font-[500] mb-1">Dashboard</p>
         {/* Header with Tabs */}
-        <div className="flex flex-row  gap-2 items-center sm:justify-between mb-8 ">
+        <div className="flex flex-row  gap-2 items-center sm:justify-between mb-4 md:mb-8 ">
           <Tabs
             defaultValue="Overview"
             className="flex-1 justify-start hidden md:flex"
@@ -201,7 +201,7 @@ export default function Dashboard() {
             </TabsList>
           </Tabs>
 
-          <div className="flex items-center flex-wrap gap-3 ml-auto">
+          <div className="flex items-center flex-wrap gap-3 md:ml-auto">
             <div className="block md:hidden">
               <Select>
                 <SelectTrigger className=" bg-[#f4f5f5] text-[#5A5C66]">

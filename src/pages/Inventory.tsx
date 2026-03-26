@@ -356,7 +356,7 @@ export default function Inventory() {
                 placeholder="Search"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 pr-13 rounded-md bg-white border-gray-200"
+                className="pl-9 pr-14 rounded-md bg-white border-gray-200"
               />
               <kbd className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 border px-1 py-0.5 rounded">
                 ⌘ F

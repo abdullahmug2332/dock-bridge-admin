@@ -66,10 +66,10 @@ interface Supplier {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Fish: "bg-blue-100 text-blue-700",
-  Shellfish: "bg-orange-100 text-orange-700",
-  Crustaceans: "bg-red-100 text-red-700",
-  Mollusks: "bg-purple-100 text-purple-700",
+  Fish: "bg-[#ECECF0] text-gray-700",
+  Shellfish: "bg-[#ECECF0] text-gray-700",
+  Crustaceans: "bg-[#ECECF0] text-gray-700",
+  Mollusks: "bg-[#ECECF0] text-gray-700",
 };
 
 const ALL_CATEGORIES = ["Fish", "Shellfish", "Crustaceans", "Mollusks"];
@@ -257,7 +257,7 @@ function Toggle({
       onClick={() => onChange(!checked)}
       className={cn(
         "relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none",
-        checked ? "bg-blue-600" : "bg-gray-300",
+        checked ? "bg-purple-600" : "bg-gray-300",
       )}
     >
       <span
@@ -426,7 +426,6 @@ export default function Suppliers() {
                   selected={toDate}
                   onSelect={setToDate}
                   initialFocus
-                  
                 />
               </PopoverContent>
             </Popover>
@@ -434,7 +433,7 @@ export default function Suppliers() {
 
           {/* Right Controls */}
           <div className="flex flex-wrap items-center justify-end gap-2 flex-1">
-            <div className="relative w-full md:flex-1 min-w-[240px]">
+            <div className="relative w-full md:flex-1 min-w-[200px]">
               <Search
                 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                 size={16}
@@ -443,7 +442,7 @@ export default function Suppliers() {
                 placeholder="Search by supplier name, contact or email"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 pr-10 rounded-md bg-white border-gray-200 text-sm"
+                className="pl-9 pr-14 rounded-md bg-white border-gray-200 text-sm"
               />
               <kbd className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 border px-1 py-0.5 rounded">
                 ⌘ F
@@ -542,7 +541,7 @@ export default function Suppliers() {
                       <span
                         key={cat}
                         className={cn(
-                          "px-2 py-0.5 rounded text-xs font-medium",
+                          "px-3 py-1 rounded text-sm font-medium",
                           CATEGORY_COLORS[cat] ?? "bg-gray-100 text-gray-600",
                         )}
                       >
@@ -557,6 +556,7 @@ export default function Suppliers() {
                       checked={supplier.status}
                       onChange={() => toggleStatus(supplier.id)}
                     />
+                    
                   </div>
                 </td>
                 <td className="px-4 py-3">
@@ -641,36 +641,36 @@ export default function Suppliers() {
               {/* Contact Grid */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-start gap-2">
-                  <User className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" />
+                  <User className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs text-gray-400">Contact Person</p>
+                    <p className="text-xs text-gray-500">Contact Person</p>
                     <p className="text-sm font-medium text-gray-800">
                       {viewSupplier.contactName}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Phone className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" />
+                  <Phone className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs text-gray-400">Phone</p>
+                    <p className="text-xs text-gray-500">Phone</p>
                     <p className="text-sm font-medium text-gray-800">
                       {viewSupplier.phone}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Mail className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" />
+                  <Mail className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs text-gray-400">Email</p>
+                    <p className="text-xs text-gray-500">Email</p>
                     <p className="text-sm font-medium text-gray-800">
                       {viewSupplier.email}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" />
+                  <MapPin className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs text-gray-400">Address</p>
+                    <p className="text-xs text-gray-500">Address</p>
                     <p className="text-sm font-medium text-gray-800">
                       {viewSupplier.address}
                     </p>
@@ -681,13 +681,13 @@ export default function Suppliers() {
               {/* Product Categories */}
               <div>
                 <p className="text-sm text-gray-500 mb-2">Product Categories</p>
-                <div className="flex gap-2 flex-wrap">
+                <div className="flex gap-2 flex-wrap`">
                   {viewSupplier.categories.map((cat) => (
                     <span
                       key={cat}
                       className={cn(
-                        "px-3 py-1 rounded-full text-xs font-medium ",
-                        CATEGORY_COLORS[cat] ?? "bg-gray-100 text-gray-600 ",
+                        "px-3 py-1 rounded text-xs font-medium ",
+                         "bg2 text-white ",
                       )}
                     >
                       {cat}
@@ -712,7 +712,7 @@ export default function Suppliers() {
                           <p className="text-sm font-medium text-gray-800">
                             {p.name}
                           </p>
-                          <p className="text-xs text-gray-400">
+                          <p className="text-xs text-gray-500">
                             {p.category} · SKU: {p.sku}
                           </p>
                         </div>
@@ -728,7 +728,7 @@ export default function Suppliers() {
               {/* Footer row */}
               <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                 <div>
-                  <p className="text-xs text-gray-400">Status</p>
+                  <p className="text-xs text-gray-500">Status</p>
                   <span
                     className={cn(
                       "mt-1 inline-block px-3 py-0.5 rounded-full text-xs font-medium",
@@ -741,7 +741,7 @@ export default function Suppliers() {
                   </span>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-gray-400">Total Products</p>
+                  <p className="text-xs text-gray-500">Total Products</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {viewSupplier.products.length}
                   </p>
@@ -994,7 +994,7 @@ export default function Suppliers() {
                       )
                     }
                     className={cn(
-                      "px-4 py-1.5 rounded-full text-sm font-medium border transition-colors",
+                      "px-4 py-1.5 rounded text-sm font-medium border transition-colors",
                       newSupplier.categories.includes(cat)
                         ? cn(
                             CATEGORY_COLORS[cat] ?? "bg-gray-100 text-gray-600",

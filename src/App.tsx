@@ -16,6 +16,10 @@ import ProductDetail from "./pages/ProductDetail";
 import OrderDetail from "./pages/OrderDetail";
 import Inventory from "./pages/Inventory";
 import Suppliers from "./pages/Suppliers";
+import CMSWebsite from "./pages/CMSWebsite";
+import Users from "./pages/Users";
+import Reviews from "./pages/Reviews";
+import Settings from "./pages/Settings";
 
 function Preloader() {
   return (
@@ -149,7 +153,7 @@ function App() {
         <AppSidebar />
         <SidebarInset className="flex-1 ">
          <Header/>
-          <div className="p-5 max-w-full overflow-x-hidden">
+          <div className="p-3 md:p-5 max-w-full overflow-x-hidden">
             {/* <p className="block md:hidden text-[20px] font-[500] mb-1">{currentPage.pageTitle}</p> */}
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -159,6 +163,10 @@ function App() {
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/inventory" element={<Inventory />} />
               <Route path="/suppliers" element={<Suppliers />} />
+              <Route path="/cms" element={<CMSWebsite />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </div>
         </SidebarInset>
