@@ -33,6 +33,7 @@ import { cn } from "@/lib/utils";
 import { FaMapPin } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 // Order type definition
 interface Order {
@@ -51,6 +52,7 @@ interface Order {
 }
 
 export default function Orders() {
+  const navigate= useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [fromDate, setFromDate] = useState<Date | undefined>();
@@ -376,6 +378,7 @@ export default function Orders() {
                 <tr
                   key={order.id}
                   className="border-b hover:bg-gray-50 border-gray-200"
+                  
                 >
                   <td className="px-4 py-3">
                     <Checkbox
@@ -446,7 +449,7 @@ export default function Orders() {
                       </DropdownMenuTrigger>
 
                       <DropdownMenuContent align="end" className="w-40">
-                        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={()=>navigate(`/order/${order.id}`)}>
                           <PiEye className="h-4 w-4" /> View
                         </DropdownMenuItem>
                         <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">

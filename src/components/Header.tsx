@@ -12,7 +12,7 @@ export default function Header() {
   const currentPage = links.find((link) => link.url === pathname);
   const { open, toggleSidebar } = useSidebar();
   return (
-    <header className="flex h-18 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 sticky top-0 right-0 bg-white border-b border-gray-200 z-[99]">
+    <header className="flex h-18 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 sticky top-0 right-0 bg-white border-b border-gray-200 z-[50]">
       <div className="flex items-center gap-2 px-4 justify-between w-full ">
         <div className="flex items-center gap-3  flex md:hidden">
           <RxHamburgerMenu className="size-7 " onClick={toggleSidebar} />

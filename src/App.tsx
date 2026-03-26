@@ -13,6 +13,9 @@ import Header from "./components/Header";
 import Orders from "./pages/Orders";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import OrderDetail from "./pages/OrderDetail";
+import Inventory from "./pages/Inventory";
+import Suppliers from "./pages/Suppliers";
 
 function Preloader() {
   return (
@@ -144,15 +147,18 @@ function App() {
       <main className="w-full"></main>
       <SidebarProvider>
         <AppSidebar />
-        <SidebarInset className="flex-1 overflow-x-hidden">
+        <SidebarInset className="flex-1 ">
          <Header/>
-          <div className="p-5 max-w-full">
+          <div className="p-5 max-w-full overflow-x-hidden">
             {/* <p className="block md:hidden text-[20px] font-[500] mb-1">{currentPage.pageTitle}</p> */}
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/orders" element={<Orders />} />
+              <Route path="/order/:id" element={<OrderDetail/>} />
               <Route path="/products" element={<Products />} />
               <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/inventory" element={<Inventory />} />
+              <Route path="/suppliers" element={<Suppliers />} />
             </Routes>
           </div>
         </SidebarInset>

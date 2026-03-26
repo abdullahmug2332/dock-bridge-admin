@@ -338,7 +338,7 @@ export default function ProductDetail() {
 
             {/* Header Section */}
             <div className=" ">
-              <h1 className="text-xl md:text-3xl font-bold text-gray-900 ">
+              <h1 className="text-xl md:text-3xl font-semibold text-gray-900 ">
                 {product.name}
               </h1>
               <div className="flex gap-4 text-[13px]  md:text-sm text-gray-600">
@@ -512,31 +512,31 @@ export default function ProductDetail() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="py-4 border-b border-gray-300">
+                <div className="py-3 border-b border-gray-300">
                   <p className="text-sm  text-gray-500">Supplier Name:</p>
                   <p className="text-gray-900 font-[600] mt-1">
                     {product.supplier.name}
                   </p>
                 </div>
-                <div className="py-4 border-b border-gray-300">
+                <div className="py-3 border-b border-gray-300">
                   <p className="text-sm  text-gray-500">Contact Person:</p>
                   <p className="text-gray-900 font-[600]  mt-1">
                     {product.supplier.contactPerson}
                   </p>
                 </div>
-                <div className="py-4 border-b border-gray-300">
+                <div className="py-3 border-b border-gray-300">
                   <p className="text-sm  text-gray-500">Email:</p>
                   <p className="text-gray-900 font-[600] mt-1">
                     {product.supplier.email}
                   </p>
                 </div>
-                <div className="py-4 border-b border-gray-300">
+                <div className="py-3 border-b border-gray-300">
                   <p className="text-sm  text-gray-500">Phone:</p>
                   <p className="text-gray-900 font-[600] mt-1">
                     {product.supplier.phone}
                   </p>
                 </div>
-                <div className="py-4 border-b border-gray-300">
+                <div className="py-3 border-b border-gray-300">
                   <p className="text-sm  text-gray-500">Address:</p>
                   <p className="text-gray-900 font-[600] mt-1">
                     {product.supplier.address}

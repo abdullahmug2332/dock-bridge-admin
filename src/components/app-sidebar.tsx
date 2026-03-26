@@ -83,7 +83,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { open, toggleSidebar } = useSidebar();
  
   return (
-    <Sidebar collapsible="icon" {...props} className="bg-[#F9F9FA]">
+    <Sidebar collapsible="icon" {...props} className="bg-[#F9F9FA]  z-[100]!">
       <SidebarHeader
         className={` ${open ? "p-4 " : "p-2"} border-b border-gray-200`}
       >
